@@ -25,8 +25,12 @@
 /obj/structure/wall_frame/New(var/new_loc, var/materialtype)
 	..(new_loc)
 
-	if(!materialtype)
-		materialtype = DEFAULT_WALL_MATERIAL
+	if (!materialtype)
+		if (istext(material))
+			materialtype = material
+		else
+			materialtype = DEFAULT_WALL_MATERIAL
+
 	material = SSmaterials.get_material_by_name(materialtype)
 	health = material.integrity
 
@@ -119,17 +123,17 @@
 
 	for(var/i = 1 to 4)
 		if(other_connections[i] != "0")
-			I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = 1<<(i-1))
+			I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = SHIFTL(1, i - 1))
 		else
-			I = image('icons/obj/wall_frame.dmi', "frame[connections[i]]", dir = 1<<(i-1))
+			I = image('icons/obj/wall_frame.dmi', "frame[connections[i]]", dir = SHIFTL(1, i - 1))
 		overlays += I
 
 	if(stripe_color)
 		for(var/i = 1 to 4)
 			if(other_connections[i] != "0")
-				I = image('icons/obj/wall_frame.dmi', "stripe_other[connections[i]]", dir = 1<<(i-1))
+				I = image('icons/obj/wall_frame.dmi', "stripe_other[connections[i]]", dir = SHIFTL(1, i - 1))
 			else
-				I = image('icons/obj/wall_frame.dmi', "stripe[connections[i]]", dir = 1<<(i-1))
+				I = image('icons/obj/wall_frame.dmi', "stripe[connections[i]]", dir = SHIFTL(1, i - 1))
 			I.color = stripe_color
 			overlays += I
 

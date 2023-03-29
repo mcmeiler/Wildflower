@@ -7,7 +7,6 @@
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
 	var/r_speed = 1.0
-	var/health = null
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = "swing_hit"
@@ -87,6 +86,7 @@
 	var/list/sprite_sheets_obj = list()
 
 	var/attack_ignore_harm_check = FALSE
+
 
 /obj/item/New()
 	..()
@@ -896,3 +896,21 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/attack_message_name()
 	return "\a [src]"
+
+
+/// Optional delay for /mob/living/carbon/human/equip_to_slot_if_possible to do_after before succeeding
+/obj/item/var/equip_delay
+
+
+/// Flags to use for do_after when equip_delay is set
+/obj/item/var/equip_delay_flags
+
+
+/// Virtual for behavior to do before do_after if equip_delay is set
+/obj/item/proc/equip_delay_before(mob/user, slot, equip_flags)
+	return
+
+
+/// Virtual for behavior to do after successful do_after if equip_delay is set
+/obj/item/proc/equip_delay_after(mob/user, slot, equip_flags)
+	return

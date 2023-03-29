@@ -36,7 +36,7 @@
 		var/obj/item/I = new etype(get_turf(H))
 		if(istype(I, /obj/item/clothing))
 			I.canremove = 0
-		H.equip_to_slot_if_possible(I,equipment[etype],0,1,1,1)
+		H.equip_to_slot_if_possible(I,equipment[etype], TRYEQUIP_REDRAW | TRYEQUIP_SILENT | TRYEQUIP_FORCE)
 		. += I
 
 /datum/spellbound_type/proc/set_antag(var/datum/mind/M, var/mob/master)
@@ -104,10 +104,10 @@
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
-			familiar_type = /mob/living/simple_animal/friendly/mouse
+			familiar_type = /mob/living/simple_animal/passive/mouse
 		if("Cat")
 			H.mutations |= mRun
-			familiar_type = /mob/living/simple_animal/friendly/cat
+			familiar_type = /mob/living/simple_animal/passive/cat
 		if("Bear")
 			var/obj/item/clothing/under/under = locate() in equipment
 			var/obj/item/clothing/head/head = locate() in equipment
